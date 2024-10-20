@@ -32,7 +32,7 @@
 
     <section aria-labelledby="information-heading" class="mt-2">
        <h3 id="information-heading">Product Information</h3>
-       <p class="text-2xl text-gray-900 mb-4">{{ $product->price }}</p>
+       <p class="text-2xl text-gray-900 mb-4">${{ $product->price }}</p>
        <p class="text-md text-gray-900 mb-4">{{ $product->description }}</p>
     </section>
 

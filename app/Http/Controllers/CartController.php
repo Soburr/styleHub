@@ -2,16 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
     public function index() {
-        dd(session()->get('cart', []));
+
+        $cart = session()->get('cart', []);
+
+        $cartProducts = Product::whereIn('id', array_keys($cart))->get();
+
+        $cartItems = $cartProducts->map(function($product) use ($cart) {
+            $product['quantity'] = $cart[$product->id];
+            $product['subtotal'] = $cart[$product->id] * $product->price;
+
+            return $product;
+        });
+
+        $total = $cartItems->sum('subtotal');
+
+        return view('cart', compact('cartItems', 'total'));
     }
     public function store(Request $request) {
+
        $request->validate([
          'product_id' => 'required|exists:products,id'
+
        ]);
 
        $cart = session()->get('cart', []);

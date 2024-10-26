@@ -37,7 +37,10 @@
     </section>
 
     <section aria-labelledby="options-heading" class="mt-10">
-       <form action="" method="POST">
+       <form action="{{ route('cart.store') }}" method="POST">
+        @csrf
+
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
         <button type="submit" class="btn btn-primary">
            Add to cart
         </button>

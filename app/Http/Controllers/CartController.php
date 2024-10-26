@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function index() {
+        dd(session()->get('cart', []));
+    }
     public function store(Request $request) {
        $request->validate([
          'product_id' => 'required|exists:products,id'

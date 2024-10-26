@@ -8,4 +8,6 @@ Route::get('/', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('/product/{product}', [ProductController::class, 'show'])->name('products.show');
 
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');

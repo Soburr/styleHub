@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Checkout</title>
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Include the Alpine library on your page -->
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Include the TailwindCSS library on your page -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <form action="{{ route('orders.store') }}" method="POST">
@@ -70,6 +81,33 @@
             <div class="mt-2">
                <input type="text" name="zip" id="zip" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1">
             </div>
+         </div>
+
+         <div class="mt-8">
+            <div class="flow-root">
+              <ul role="list" class="my-6 divide-y divide-gray-200">
+                 @foreach ($cartItems as $item)
+                   <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded">
+                      <img src="{{ $item->image }}">
+                   </div>
+
+                   <div class="ml-4 flex flex-1 flex-col">
+
+                       <div>
+                          <h3>{{ $item->name }}</h3>
+                          <h3>${{ $item->price }}</h3>
+                          <p>Qty{{ $item->quantity }}</p>
+                          <h3>${{ $total }}</h3>
+                       </div>
+
+                   </div>
+                 @endforeach
+              </ul>
+            </div>
+         </div>
+
+         <div class="mt-2">
+            <button type="submit" class="btn btn-primary">Submit orders</button>
          </div>
 
     </form>

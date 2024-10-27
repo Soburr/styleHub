@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,7 @@ Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::delete('/cart/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
+
+Route::get('/checkout', [OrderController::class, 'create'])->name('orders.create');
+
+Route::post('/checkout', [OrderController::class, 'store'])->name('orders.store');
